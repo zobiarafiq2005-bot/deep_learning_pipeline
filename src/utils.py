@@ -1,7 +1,7 @@
 import os
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix, classification_report
 
 
 class PlotUtils:
@@ -61,3 +61,15 @@ def plot_training_history(history, save_dir: str = "outputs/figures", filename: 
 
 def plot_confusion_matrix(y_true, y_pred, save_dir: str = "outputs/figures", filename: str = "cnn_confusion_matrix.png"):
     PlotUtils.plot_confusion_matrix(y_true, y_pred, save_dir=save_dir, filename=filename)
+
+
+def print_evaluation_report(y_true, y_pred, target_names=None):
+    """
+    Prints precision, recall, and F1-score classification report.
+    """
+    print("\n" + "="*50)
+    print("         CLASSIFICATION METRICS REPORT         ")
+    print("="*50)
+    report = classification_report(y_true, y_pred, target_names=target_names, digits=4)
+    print(report)
+    return report
